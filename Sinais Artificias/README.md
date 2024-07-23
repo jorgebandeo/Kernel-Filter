@@ -12,7 +12,9 @@ O objetivo deste projeto é gerar um sinal limpo, gerar ruído gaussiano branco 
 
 O sinal gerado é a soma de uma raiz quadrada e uma senoide. A fórmula utilizada é:
 
-\[ \text{sinal}(n) = \sqrt{n} + \sin\left(\frac{2 \pi \cdot 500 \cdot n}{8000}\right) \]
+$$
+\text{sinal}(n) = \sqrt{n} + \sin\left(\frac{2 \pi \cdot 500 \cdot n}{8000}\right)
+$$
 
 onde:
 - \( n \) é o vetor de tempo.
@@ -22,19 +24,34 @@ onde:
 Para gerar o ruído gaussiano branco com a potência correta, usamos as seguintes etapas:
 
 1. **Calcular a potência do sinal**:
-\[ P_{\text{sinal}} = \frac{1}{N} \sum_{i=1}^{N} (\text{sinal}(n_i))^2 \]
+
+$$
+P_{\text{sinal}} = \frac{1}{N} \sum_{i=1}^{N} (\text{sinal}(n_i))^2
+$$
 
 2. **Converter o SNR de decibéis para linear**:
-\[ \text{SNR}_{\text{linear}} = 10^{\left(\frac{\text{SNR}_{\text{dB}}}{10}\right)} \]
+
+$$
+\text{SNR}_{\text{linear}} = 10^{\left(\frac{\text{SNR}_{\text{dB}}}{10}\right)}
+$$
 
 3. **Calcular a potência do ruído**:
-\[ P_{\text{ruído}} = \frac{P_{\text{sinal}}}{\text{SNR}_{\text{linear}}} \]
+
+$$
+P_{\text{ruído}} = \frac{P_{\text{sinal}}}{\text{SNR}_{\text{linear}}}
+$$
 
 4. **Gerar o ruído gaussiano branco**:
-\[ \text{ruído} \sim \mathcal{N}(0, \sqrt{P_{\text{ruído}}}) \]
+
+$$
+\text{ruído} \sim \mathcal{N}(0, \sqrt{P_{\text{ruído}}})
+$$
 
 ### Sinal com Ruído
 
 O sinal com ruído é simplesmente a soma do sinal e do ruído:
 
-\[ \text{sinal\_com\_ruído} = \text{sinal} + \text{ruído} \]
+$$
+\text{sinal\_com\_ruído} = \text{sinal} + \text{ruído}
+$$
+

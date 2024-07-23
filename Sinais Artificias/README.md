@@ -52,6 +52,5 @@ $$
 O sinal com ruído é simplesmente a soma do sinal e do ruído:
 
 $$
-\text{sinal\_com\_ruído} = \text{sinal} + \text{ruído}
+\text{sinal\_com\_ruido} = \text{sinal} + \text{ruido}
 $$
-

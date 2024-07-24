@@ -59,7 +59,7 @@ plt.subplot(3, 1, 2)
 plt.plot(n, noise, label='Ruído', color='orange')
 plt.xlabel('Tempo')
 plt.ylabel('Amplitude')
-plt.title('Ruído')
+plt.title('Ruído 40dB')
 plt.grid(True)
 
 plt.subplot(3, 1, 3)

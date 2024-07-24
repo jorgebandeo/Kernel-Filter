@@ -79,4 +79,5 @@ O sinal combinado com o ruído é obtido pela simples soma do sinal com o ruído
 
 ## Resultado 
 
+Periodo de captura 1s com frequencia de 500mH:
 ![Simulação](./Simulação.png)

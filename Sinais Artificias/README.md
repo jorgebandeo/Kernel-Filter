@@ -77,3 +77,6 @@ O sinal combinado com o ruído é obtido pela simples soma do sinal com o ruído
 \text{sinal\_com\_ruido} = \text{sinal} + \text{ruído}
 ```
 
+## Resultado 
+
+![Simulação](Sinais Artificias/Simulação.png)

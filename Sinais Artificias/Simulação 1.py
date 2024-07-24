@@ -12,18 +12,17 @@ def sinal(n):
 def gerar_ruido(sinal, SNR_db):
     # Calcular potência do sinal
     potencia_sinal = np.mean(sinal ** 2)
-    # Converter a potência do sinal para decibéis (dB)
-    potencia_sinal_dB = 10 * np.log10(potencia_sinal)
-    potencia_ruido_dB = potencia_sinal_dB - SNR_db
-    potencia_ruido_linear = 10 ** (potencia_ruido_dB / 10)
-    std_dev = np.sqrt(potencia_ruido_linear)
-    noise = np.random.normal(0, std_dev, len(sinal))  # tamanho do ruído desejado
+    # Converter a potência do sinal para decibéis (dB
+    SNR = 10 ** (SNR_db / 10)
+    potencia_ruido = (potencia_sinal/SNR)
 
+    std_dev = np.sqrt(potencia_ruido)
+    noise = np.random.normal(0, std_dev, len(sinal))  # tamanho do ruído desejado
 
     return noise
 
 # Definir o intervalo e o número de pontos
-n = np.linspace(0, 500, 500)
+n = np.linspace(0, 1, 500)
 
 # Gerar o sinal
 signal = sinal(n)
@@ -62,4 +61,5 @@ plt.title('Sinal com Ruído')
 plt.grid(True)
 
 plt.tight_layout()
+plt.savefig('./Sinais Artificias/Simulação.png')
 plt.show()

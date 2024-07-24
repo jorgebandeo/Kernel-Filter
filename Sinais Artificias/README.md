@@ -1,27 +1,27 @@
 # Geração de Sinal e Ruído
 
-Este projeto gera um sinal e ruído gaussiano branco de forma separada e, em seguida, combina ambos. O código é implementado em Python utilizando as bibliotecas `numpy` e `matplotlib`.
+Este projeto é dedicado à geração de um sinal e ruído gaussiano branco separadamente e sua posterior combinação. A implementação é feita em Python, utilizando as bibliotecas `numpy` e `matplotlib`.
 
 ## Descrição
 
-O objetivo deste projeto é gerar um sinal limpo, gerar ruído gaussiano branco com uma relação sinal-ruído (SNR) especificada, e combinar o sinal com o ruído. O resultado é visualizado através de gráficos.
+O principal objetivo é criar um sinal limpo, gerar ruído gaussiano branco com uma relação sinal-ruído (SNR) específica, e então combinar ambos. O resultado final é visualizado através de gráficos.
 
-## Fórmulas
+## Detalhamento das Fórmulas
 
 ### Sinal
 
-O sinal gerado é a soma de uma raiz quadrada e uma senoide. A fórmula utilizada é:
+O sinal é gerado como a soma de uma função raiz quadrada e uma senoide. A fórmula utilizada é:
 
 $$
 \text{sinal}(n) = \sqrt{n} + \sin\left(\frac{2 \pi \cdot 500 \cdot n}{8000}\right)
 $$
 
 onde:
-- \( n \) é o vetor de tempo.
+- \( n \) representa o vetor de tempo.
 
 ### Ruído Gaussiano Branco
 
-Para gerar o ruído gaussiano branco com a potência correta, usamos as seguintes etapas:
+Para gerar o ruído gaussiano branco com a potência adequada, seguimos os seguintes passos:
 
 1. **Calcular a potência do sinal**:
 
@@ -29,7 +29,7 @@ $$
 P_{\text{sinal}} = \frac{1}{N} \sum_{i=1}^{N} (\text{sinal}(n_i))^2
 $$
 
-2. **Converter o SNR de decibéis para linear**:
+2. **Converter a SNR de decibéis para uma escala linear**:
 
 $$
 \text{SNR}_{\text{linear}} = 10^{\left(\frac{\text{SNR}_{\text{dB}}}{10}\right)}
@@ -47,8 +47,10 @@ $$
 \text{ruído} \sim \mathcal{N}(0, \sqrt{P_{\text{ruído}}})
 $$
 
-### Sinal com Ruído
+### Combinação do Sinal com o Ruído
 
-O sinal com ruído é simplesmente a soma do sinal e do ruído:
+O sinal combinado com o ruído é obtido pela simples soma do sinal com o ruído gerado:
 
-$$\text{sinal\_com\_ruido} = \text{sinal} + \text{ruido}$$
+$$
+\text{sinal\_com\_ruido} = \text{sinal} + \text{ruído}
+$$

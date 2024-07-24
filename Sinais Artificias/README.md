@@ -13,7 +13,7 @@ O principal objetivo é criar um sinal limpo, gerar ruído gaussiano branco com 
 O sinal é gerado como a soma de uma função raiz quadrada e uma senoide. A fórmula utilizada é:
 
 ```math
-\text{sinal}(n) = \sqrt{2} + \sin\left(\frac{2 \pi \cdot 500 \cdot n}{8000}\right)
+\text{sinal}(n) = \sqrt{n} + \sin\left(\frac{2 \pi \cdot 500 \cdot n}{8000}\right)
 ```
 
 onde:
@@ -29,20 +29,18 @@ Para gerar o ruído gaussiano branco com a potência adequada, seguimos os segui
 P_{\text{sinal, linear}} = \frac{1}{N} \sum_{i=1}^{N} (\text{sinal}(n_i))^2
 ```
 
-2. **Converter a potência do sinal linear em dB**:
+2. **Converter a potência do sinal linear para dB**:
 
 ```math
-P_{\text{sinal, dB}} = 10\text{log}_{10}(P_{\text{sinal, linear}})
+\text{P}_{\text{sina, db}} = 10\text{log}_\text{10}(\text{P_{\text{sinal, linear}}})
 ```
 
 3. **Calcular a potência do ruído**:
 
 ```math
-SNR_{\text{dB}} = P_{\text{sinal, dB}} - P_{\text{ruido, dB}}
+P_{\text{ruído}} = \frac{P_{\text{sinal}}}{\text{SNR}_{\text{linear}}}
 ```
-```math
-P_{\text{ruido, dB}} = P_{\text{sinal, dB}} - SNR_{\text{dB}}
-```
+
 4. **Gerar o ruído gaussiano branco**:
 
 ```math

@@ -32,16 +32,47 @@ P_{\text{sinal, linear}} = \frac{1}{N} \sum_{i=1}^{N} (\text{sinal}(n_i))^2
 2. **Converter a potência do sinal linear para dB**:
 
 ```math
-P_{\text{sina, db}} = 10\text{log}_{10} (P_{\text{sina, linear}} )
+P_{\text{sina, dB}} = 10\text{log}_{10} (P_{\text{sina, linear}} )
 ```
 
-3. **Calcular a potência do ruído**:
+3. **Calcular a potência em dB do ruído**:
 
 ```math
-P_{\text{ruído}} = \frac{P_{\text{sinal}}}{\text{SNR}_{\text{linear}}}
+SNR_{\text{dB}} = P_{\text{sina, dB}} - P_{\text{ruído, dB}}
 ```
 
-4. **Gerar o ruído gaussiano branco**:
+```math
+P_{\text{ruído, dB}} = P_{\text{sina, dB}} - SNR_{\text{dB}}
+```
+4. **Converter a potência do ruído em dB para linear**:
+
+Para inverter a fórmula \( P_{\text{sina, dB}} = 10\log_{10} (P_{\text{sina, linear}}) \) e transformar de dB para linear:
+
+4.1. Comece com a equação original:
+
+```math
+P_{\text{sina, dB}} = 10\log_{10} (P_{\text{sina, linear}})
+```
+
+4.2. Divida ambos os lados da equação por 10:
+
+```math
+\frac{P_{\text{sina, dB}}}{10} = \log_{10} (P_{\text{sina, linear}})
+```
+
+4.3. Utilize a operação inversa do logaritmo base 10, que é elevar 10 à potência de ambos os lados da equação:
+
+```math
+10^{\frac{P_{\text{sina, dB}}}{10}} = P_{\text{sina, linear}}
+```
+
+Portanto, a fórmula invertida para converter de dB para linear é:
+
+```math
+P_{\text{sina, linear}} = 10^{\frac{P_{\text{sina, dB}}}{10}}
+```
+
+5. **Gerar o ruído gaussiano branco**:
 
 ```math
 \text{ruído} \sim \mathcal{N}(0, \sqrt{P_{\text{ruído}}})

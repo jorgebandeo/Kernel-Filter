@@ -46,7 +46,7 @@ P_{\text{ruído, dB}} = P_{\text{sina, dB}} - SNR_{\text{dB}}
 ```
 4. **Converter a potência do ruído em dB para linear**:
 
-Para inverter a fórmula \[math P_{\text{sina, dB}} = 10\log_{10} (P_{\text{sina, linear}})\] e transformar de dB para linear:
+Para inverter a fórmula $ math P_{\text{sina, dB}} = 10\log_{10} (P_{\text{sina, linear}}) $ e transformar de dB para linear:
 
 4.1. Comece com a equação original:
 

@@ -44,42 +44,26 @@ Dividimos ambos lados por 10:
 10^{\frac{SNR_{\text{dB}}}{10}} = 10^{\text{log}_{10} (SNR_{\text{linear}})}
 ```
 
+Pela regra:
+
+```math
+x = 10^{\text{log}_{10} (x)}
+```
+```math
+SNR_{\text{linear}} = 10^{\frac{SNR_{\text{dB}}}{10}} 
+```
+
 3. **Calcular a potência em dB do ruído**:
 
 ```math
-SNR_{\text{dB}} = P_{\text{sina, dB}} - P_{\text{ruído, dB}}
+SNR_{\text{linear}} = \frac{P_{\text{sina, linear}}}{P_{\text{ruído, linear}}}
 ```
 
 ```math
-P_{\text{ruído, dB}} = P_{\text{sina, dB}} - SNR_{\text{dB}}
-```
-4. **Converter a potência do ruído em dB para linear**:
-
-```math
-P_{\text{ruído, dB}} = 10\log_{10} (P_{\text{ruído, linear}})
+P_{\text{ruído, linear}} = \frac{P_{\text{sina, linear}}}{SNR_{\text{linear}}}
 ```
 
-Para inverter a fórmula e transformar de dB para linear:
-
-4.2. Divida ambos os lados da equação por 10:
-
-```math
-\frac{P_{\text{ruído, dB}}}{10} = \log_{10} (P_{\text{ruído, linear}})
-```
-
-4.3. Utilize a operação inversa do logaritmo base 10, que é elevar 10 à potência de ambos os lados da equação:
-
-```math
-10^{\frac{P_{\text{ruído, dB}}}{10}} = P_{\text{ruído, linear}}
-```
-
-Portanto, a fórmula invertida para converter de dB para linear é:
-
-```math
-P_{\text{ruído, linear}} = 10^{\frac{P_{\text{ruído, dB}}}{10}}
-```
-
-5. **Gerar o ruído gaussiano branco**:
+4. **Gerar o ruído gaussiano branco**:
 
 ```math
 \text{ruído} \sim \mathcal{N}(0, \sqrt{P_{\text{ruído}}})

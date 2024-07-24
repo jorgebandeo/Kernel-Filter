@@ -39,7 +39,7 @@ Dividimos ambos lados por 10:
 ```math
 \frac{SNR_{\text{dB}}}{10} = \text{log}_{10} (SNR_{\text{linear}})
 ```
-
+Aplicar a operação inversa do logaritmo (exponenciação) para ambos os lados:
 ```math
 10^{\frac{SNR_{\text{dB}}}{10}} = 10^{\text{log}_{10} (SNR_{\text{linear}})}
 ```

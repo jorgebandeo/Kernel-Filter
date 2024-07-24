@@ -1,5 +1,3 @@
-Para garantir que as fórmulas em LaTeX sejam renderizadas corretamente no GitHub, podemos usar a sintaxe do Markdown que o GitHub reconhece. Aqui está o texto ajustado para o formato `README.md`:
-
 # Geração de Sinal e Ruído
 
 Este projeto é dedicado à geração de um sinal e ruído gaussiano branco separadamente e sua posterior combinação. A implementação é feita em Python, utilizando as bibliotecas `numpy` e `matplotlib`.
@@ -15,7 +13,7 @@ O principal objetivo é criar um sinal limpo, gerar ruído gaussiano branco com 
 O sinal é gerado como a soma de uma função raiz quadrada e uma senoide. A fórmula utilizada é:
 
 ```math
-\text{sinal}(n) = \sqrt{n} + \sin\left(\frac{2 \pi \cdot 500 \cdot n}{8000}\right)
+\text{sinal}(n) = \sqrt{2} + \sin\left(\frac{2 \pi \cdot 500 \cdot n}{8000}\right)
 ```
 
 onde:
@@ -28,13 +26,13 @@ Para gerar o ruído gaussiano branco com a potência adequada, seguimos os segui
 1. **Calcular a potência do sinal**:
 
 ```math
-P_{\text{sinal}} = \frac{1}{N} \sum_{i=1}^{N} (\text{sinal}(n_i))^2
+P_{\text{sinal}_\text{linear}} = \frac{1}{N} \sum_{i=1}^{N} (\text{sinal}(n_i))^2
 ```
 
-2. **Converter a SNR de decibéis para uma escala linear**:
+2. **Converter a potência do sinal linear em dB**:
 
 ```math
-\text{SNR}_{\text{linear}} = 10^{\left(\frac{\text{SNR}_{\text{dB}}}{10}\right)}
+P_{\text{sinal}_\text{dB}} = 10\text{log}_{10}(P_{\text{sinal}_\text{linear}})
 ```
 
 3. **Calcular a potência do ruído**:

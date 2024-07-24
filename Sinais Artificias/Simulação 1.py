@@ -6,7 +6,7 @@ np.random.seed(42)
 
 # Sinal limpo
 def sinal(n):
-    return np.sqrt(n) + np.sin((2 * np.pi * 500 * n) / 8000)
+    return np.sqrt(2) + np.sin((2 * np.pi * 500 * n) / 8000)
 
 # Ruído gaussiano branco
 def gerar_ruido(signal, snr_db):
@@ -23,13 +23,13 @@ def gerar_ruido(signal, snr_db):
     return noise
 
 # Definir o intervalo e o número de pontos
-n = np.linspace(0, 1, 500)
+n = np.linspace(0, 500, 500)
 
 # Gerar o sinal
 signal = sinal(n)
 
 # Definir o SNR desejado
-snr_db = 20
+snr_db = -40
 
 # Gerar o ruído
 noise = gerar_ruido(signal, snr_db)

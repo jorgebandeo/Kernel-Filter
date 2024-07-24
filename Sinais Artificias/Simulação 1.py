@@ -36,6 +36,15 @@ noise = gerar_ruido(signal, snr_db)
 # Combinar o sinal com o ruído
 signal_with_noise = signal + noise
 
+
+
+# ////////////////////////////////////////////
+    # sinal deve entrar em outra estrutura que vai fazer a KF
+    # O resultado sera salvo em imagem mas o procesamento daqui em diante é em outra pasta
+    # esse e o Exemplo de uso do elemento
+    # posso fazer com que esse codigo receba o sinal filtrado para multrimlas plotagens 
+# ////////////////////////////////////////////
+
 # Plotar os resultados
 plt.figure(figsize=(12, 6))
 

@@ -52,23 +52,23 @@ P_{\text{ruído, dB}} = 10\log_{10} (P_{\text{ruído, linear}})
 
 Para inverter a fórmula e transformar de dB para linear:
 
-    4.2. Divida ambos os lados da equação por 10:
+4.2. Divida ambos os lados da equação por 10:
 
-    ```math
-    \frac{P_{\text{ruído, dB}}}{10} = \log_{10} (P_{\text{ruído, linear}})
-    ```
+```math
+\frac{P_{\text{ruído, dB}}}{10} = \log_{10} (P_{\text{ruído, linear}})
+```
 
-    4.3. Utilize a operação inversa do logaritmo base 10, que é elevar 10 à potência de ambos os lados da equação:
+4.3. Utilize a operação inversa do logaritmo base 10, que é elevar 10 à potência de ambos os lados da equação:
 
-    ```math
-    10^{\frac{P_{\text{ruído, dB}}}{10}} = P_{\text{ruído, linear}}
-    ```
+```math
+10^{\frac{P_{\text{ruído, dB}}}{10}} = P_{\text{ruído, linear}}
+```
 
-    Portanto, a fórmula invertida para converter de dB para linear é:
+Portanto, a fórmula invertida para converter de dB para linear é:
 
-    ```math
-    P_{\text{ruído, linear}} = 10^{\frac{P_{\text{ruído, dB}}}{10}}
-    ```
+```math
+P_{\text{ruído, linear}} = 10^{\frac{P_{\text{ruído, dB}}}{10}}
+```
 
 5. **Gerar o ruído gaussiano branco**:
 

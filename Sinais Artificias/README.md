@@ -26,21 +26,23 @@ Para gerar o ruído gaussiano branco com a potência adequada, seguimos os segui
 1. **Calcular a potência do sinal**:
 
 ```math
-P_{\text{sinal}_\text{linear}} = \frac{1}{N} \sum_{i=1}^{N} (\text{sinal}(n_i))^2
+P_{\text{sinal, linear}} = \frac{1}{N} \sum_{i=1}^{N} (\text{sinal}(n_i))^2
 ```
 
 2. **Converter a potência do sinal linear em dB**:
 
 ```math
-P_{\text{sinal}_\text{dB}} = 10\text{log}_{10}(P_{\text{sinal}_\text{linear}})
+P_{\text{sinal, dB}} = 10\text{log}_{10}(P_{\text{sinal, linear}})
 ```
 
 3. **Calcular a potência do ruído**:
 
 ```math
-P_{\text{ruído}} = \frac{P_{\text{sinal}}}{\text{SNR}_{\text{linear}}}
+SNR_{\text{dB}} = P_{\text{sinal, dB}} - P_{\text{ruido, dB}}
 ```
-
+```math
+P_{\text{ruido, dB}} = P_{\text{sinal, dB}} - SNR_{\text{dB}}
+```
 4. **Gerar o ruído gaussiano branco**:
 
 ```math

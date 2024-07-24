@@ -26,7 +26,9 @@ Para gerar o ruído gaussiano branco com a potência correta, usamos as seguinte
 1. **Calcular a potência do sinal**:
 
 $$
+
 P_{\text{sinal}} = \frac{1}{N} \sum_{i=1}^{N} (\text{sinal}(n_i))^2
+
 $$
 
 2. **Converter o SNR de decibéis para linear**:
@@ -52,5 +54,7 @@ $$
 O sinal com ruído é simplesmente a soma do sinal e do ruído:
 
 $$
+
 \text{sinal\_com\_ruido} = \text{sinal} + \text{ruido}
+
 $$

@@ -9,17 +9,15 @@ def sinal(n):
     return np.sqrt(2) + np.sin((2 * np.pi * 500 * n) / 8000)
 
 # Ruído gaussiano branco
-def gerar_ruido(signal, snr_db):
-    # Calcular a potência do sinal
-    signal_power = np.mean(signal ** 2)
+def gerar_ruido(sinal, SNR_db):
+    # Calcular potência do sinal
+    potencia_sinal = np.mean(sinal ** 2)
+    # Converter a potência do sinal para decibéis (dB)
+    potencia_sinal_dB = 10 * np.log10(potencia_sinal)
     
-    # Calcular a potência do ruído
-    snr_linear = 10 ** (snr_db / 10)
-    noise_power = signal_power / snr_linear
-    
-    # Gerar ruído branco gaussiano com a potência desejada
-    noise = np.random.normal(0, np.sqrt(noise_power), len(signal))
-    
+
+
+
     return noise
 
 # Definir o intervalo e o número de pontos

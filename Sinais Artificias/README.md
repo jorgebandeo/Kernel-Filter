@@ -32,7 +32,7 @@ P_{\text{sinal, linear}} = \frac{1}{N} \sum_{i=1}^{N} (\text{sinal}(n_i))^2
 2. **Converter a potência do sinal linear para dB**:
 
 ```math
-P_{\text{sina, db}} = 10\text{log}_\text{10}\text{(P_{\text{sinal, linear}})}
+P_{\text{sina, db}} = 10\text{log}_{10}\text{(P_{\text{sinal, linear}})}
 ```
 
 3. **Calcular a potência do ruído**:

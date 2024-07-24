@@ -1,3 +1,5 @@
+Vamos ajustar a formatação para garantir que o LaTeX seja corretamente renderizado. Aqui está o texto revisado:
+
 # Geração de Sinal e Ruído
 
 Este projeto é dedicado à geração de um sinal e ruído gaussiano branco separadamente e sua posterior combinação. A implementação é feita em Python, utilizando as bibliotecas `numpy` e `matplotlib`.

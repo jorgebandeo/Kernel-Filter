@@ -79,4 +79,4 @@ O sinal combinado com o ruído é obtido pela simples soma do sinal com o ruído
 
 ## Resultado 
 
-![Simulação](Sinais Artificias/Simulação.png)
+![Simulação](./Simulação.png)

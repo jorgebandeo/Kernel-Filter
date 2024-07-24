@@ -40,7 +40,9 @@ Dividimos ambos lados por 10:
 \frac{SNR_{\text{dB}}}{10} = \text{log}_{10} (SNR_{\text{linear}})
 ```
 
-
+```math
+10^{\frac{SNR_{\text{dB}}}{10}} = 10^{\text{log}_{10} (SNR_{\text{linear}})}
+```
 
 3. **Calcular a potência em dB do ruído**:
 

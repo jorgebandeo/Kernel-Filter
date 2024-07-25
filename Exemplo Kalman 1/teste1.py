@@ -2,7 +2,7 @@ import numpy as np
 from Algoritm import run_kalman_filter, plot
 
 # Define o mesmo ruído para sempre
-np.random.seed(42)
+#np.random.seed(42)
 
 # Sinal limpo
 def sinal(n):

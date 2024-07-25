@@ -16,7 +16,7 @@ A função de kernel gaussiano é definida como:
 K(x_1, x_2) = \exp\left(-\frac{\|x_1 - x_2\|^2}{2\sigma^2}\right)
 ```
 
-onde $ x_1 $ e $ x_2 $ são os vetores de entrada e $ \sigma $ é o parâmetro de dispersão do kernel.
+onde $x_1$ e $x_2$ são os vetores de entrada e $\sigma$ é o parâmetro de dispersão do kernel.
 
 ```python
 # Função de kernel gaussiano (RBF)
@@ -52,7 +52,7 @@ A predição é feita calculando a soma ponderada dos valores do kernel entre a 
 y = \sum_{i=1}^{n} \alpha_i K(x, x_i)
 ```
 
-onde $ \alpha_i $ são os coeficientes armazenados, $ K $ é a função de kernel, e $ x_i $ são as entradas armazenadas.
+onde $\alpha_i$ são os coeficientes armazenados, $K$ é a função de kernel, e $x_i$ são as entradas armazenadas.
 
 ```python
     def predict(self, x):
@@ -64,13 +64,13 @@ onde $ \alpha_i $ são os coeficientes armazenados, $ K $ é a função de kerne
 
 #### Atualização dos Coeficientes
 
-Os coeficientes $\alpha$ são atualizados com base no erro $ e $ entre a saída desejada $ d $ e a predição $ y $:
+Os coeficientes $\alpha$ são atualizados com base no erro $e$ entre a saída desejada $d$ e a predição $y$:
 
 ```math
 \alpha_{k+1} = \alpha_k + \eta \cdot e
 ```
 
-onde $ \eta $ é o passo de atualização e $ e = d - y $.
+onde $\eta$ é o passo de atualização e $e = d - y$.
 
 ```python
     def update(self, x, d):
@@ -108,7 +108,7 @@ def calculate_psnr(original, predicted):
 O NMSE é calculado como:
 
 ```math
-\text{NMSE} = 10 \cdot \log_{10}\left(\frac{\text{MSE}}{\text{Var}}\right
+\text{NMSE} = 10 \cdot \log_{10}\left(\frac{\text{MSE}}{\text{Var}}\right)
 ```
 
 onde $\text{MSE}$ é o erro quadrático médio e $\text{Var}$ é a variância do sinal original.

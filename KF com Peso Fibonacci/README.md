@@ -192,7 +192,7 @@ Abaixo está um exemplo do Filtro de Kalman aplicado a um sinal de teste:
 \text{sinal}(n) = \sqrt{n} + \sin\left(\frac{2 \pi \cdot 500 \cdot n}{8000}\right)
 ```
 
-![Resultado do Filtro de Kalman](/Exemplo%20Kalman%201/teste%20simulação%201.png)
+![Resultado do Filtro de Kalman](/KF%20com%20Peso%20Fibonacci/teste%20simulação%201.png)
 
 Para executar o Filtro de Kalman:
 

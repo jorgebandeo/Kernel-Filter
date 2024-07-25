@@ -93,7 +93,7 @@ def calculate_mse(filtered, rw, numStates):
 
 def run_kalman_filter(noisy_signal, numStates):
     seq = fibonacci(2000)
-    filtered, nmse_values = kfilter(noisy_signal, numStates, seq, iterations=10)
+    filtered, nmse_values = kfilter(noisy_signal, numStates, seq, iterations=20)
     mse = calculate_mse(filtered, noisy_signal, numStates)
     
     return filtered, nmse_values, mse

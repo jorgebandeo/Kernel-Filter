@@ -58,6 +58,7 @@ def plot(original, filtered, nmse_values):
     plt.legend()
 
     plt.tight_layout()
+    plt.savefig('Exemplo Kalman 1/teste com dados/teste csv.png')
     plt.show()
 
 def kfilter(rw, numStates, seq):

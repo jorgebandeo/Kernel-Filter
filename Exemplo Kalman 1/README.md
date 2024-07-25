@@ -188,6 +188,10 @@ A utilização da sequência de Fibonacci no cálculo dos pesos do filtro de Kal
 
 Abaixo está um exemplo do Filtro de Kalman aplicado a um sinal de teste:
 
+```math
+\text{sinal}(n) = \sqrt{n} + \sin\left(\frac{2 \pi \cdot 500 \cdot n}{8000}\right)
+```
+
 ![Resultado do Filtro de Kalman](/Exemplo%20Kalman%201/teste%20simulação%201.png)
 
 Para executar o Filtro de Kalman:

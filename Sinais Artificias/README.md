@@ -13,7 +13,7 @@ O principal objetivo é criar um sinal limpo, gerar ruído gaussiano branco com 
 O sinal é gerado como a soma de uma função raiz quadrada e uma senoide. A fórmula utilizada é:
 
 ```math
-\text{sinal}(n) = \sqrt{n} + \sin\left(\frac{2 \pi \cdot 500 \cdot n}{8000}\right)
+\text{sinal}(n) = \sqrt{2} + \sin\left(\frac{2 \pi \cdot 500 \cdot n}{8000}\right)
 ```
 
 onde:

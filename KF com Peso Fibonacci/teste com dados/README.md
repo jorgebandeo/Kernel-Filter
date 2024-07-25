@@ -16,7 +16,7 @@ Este repositório contém dois experimentos distintos utilizando um Filtro de Ka
 
 #### Resultados
 
-![Resultado do Filtro de Kalman Padrão](/Exemplo%20Kalman%201/teste%20com%20dados/teste%20csv.png)
+![Resultado do Filtro de Kalman Padrão](/KF%20com%20Peso%20Fibonacci/teste%20com%20dados/teste%20csv.png)
 
 Neste experimento, o filtro de Kalman foi capaz de reduzir significativamente o ruído presente no sinal original do acelerômetro, resultando em uma estimativa mais suave e precisa.
 
@@ -30,7 +30,7 @@ Neste experimento, o filtro de Kalman foi capaz de reduzir significativamente o 
 
 #### Resultados
 
-![Resultado do Filtro de Kalman Potencializado](/Exemplo%20Kalman%201/teste%20com%20dados/teste%20potencializado%20csv.png)
+![Resultado do Filtro de Kalman Potencializado](/KF%20com%20Peso%20Fibonacci/teste%20com%20dados/teste%20potencializado%20csv.png)
 
 Apesar da filtragem mais potente, a quantidade de iterações e o aumento no número de estados resultaram em uma redução no desempenho do filtro, com um custo computacional mais alto e uma menor precisão na estimativa do sinal.
 

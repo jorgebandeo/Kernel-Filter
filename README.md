@@ -2,7 +2,7 @@
 # Algoritmo de Kernel Filtered-x Least Mean Square (KFxLMS)
 
 ## Melhor resultado 
-A partir dos dados coletados na pesquisa SIBGRAPI, conseguimos verificar a aplicação de um ruído artificial em um sinal. Logo após, testamos o conceito de filtros de Kalman abordados para o processamento do sinal.
+A partir dos dados coletados na pesquisa SIBGRAPI, conseguimos verificar a aplicação de um ruído artificial em um sinal. Logo após, testamos o conceito de filtros de Kalman abordados para o processamento do sinal fazendo uso de pesos gerados por Febonacci.
 
 ![Teste](resultados_Fibonacci.png)
 

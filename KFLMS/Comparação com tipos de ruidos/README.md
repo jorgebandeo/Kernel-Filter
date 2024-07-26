@@ -12,7 +12,9 @@ O código gera diferentes tipos de ruídos para testar a eficácia do algoritmo 
 O ruído branco é um sinal com uma densidade espectral de potência constante, ou seja, possui a mesma potência em todas as frequências.
 
 **Fórmula Matemática:**
+
 $$\text{white\_noise}(n) = \sin(2 \pi f n) + N(0, 1)$$
+
 onde $N(0, 1)$ representa uma distribuição normal com média 0 e variância 1.
 
 **Código:**

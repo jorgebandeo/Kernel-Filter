@@ -13,7 +13,7 @@ O ruído branco é um sinal com uma densidade espectral de potência constante, 
 
 **Fórmula Matemática:**
 
-$$\text{white\_noise}(n) = \sin(2 \pi f n) + N(0, 1)$$
+$$white_{noise}(n) = \sin(2 \pi f n) + N(0, 1)$$
 
 onde $N(0, 1)$ representa uma distribuição normal com média 0 e variância 1.
 

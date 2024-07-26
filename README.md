@@ -1,9 +1,16 @@
 
 # Algoritmo de Kernel Filtered-x Least Mean Square (KFxLMS)
 
-## Descrição Geral
+## Melhor resultado 
+A partir dos dados coletados na pesquisa SIBGRAPI, conseguimos verificar a aplicação de um ruído artificial em um sinal. Logo após, testamos o conceito de filtros de Kalman abordados para o processamento do sinal.
+
+![Teste](resultados_Fibonacci.png)
+
+
+## Descrição Geral Lógica
 
 O principal objetivo do truque do kernel é transformar um problema não linear no conjunto X em um problema linear no espaço H. Então, podemos resolver o problema linear em H, que é uma tarefa relativamente fácil. A teoria dos espaços de Hilbert com núcleo reprodutivo (RKHS) assegura a existência de uma representação Φ : X → H : Φ(x) = kx que mapeia cada elemento de X para um elemento de H (kx ∈ H é chamado de função núcleo reprodutivo para o ponto x). A seguir, apresentamos a derivação do filtro adaptativo proposto baseado no algoritmo filtered-x LMS.
+
 
 ## Fórmulas e Funcionamento do Filtro
 

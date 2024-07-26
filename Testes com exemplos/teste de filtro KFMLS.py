@@ -110,7 +110,6 @@ def adicionar_ruido_e_filtrar(dados, sigma_ruido=1.0):
 
     # Plotando os resultados
     plt.figure(figsize=(15, 8))
-
     plt.subplot(2, 2, 1)
     plt.plot(y_ruidoso, label='Sinal Ruidoso')
     plt.plot(predictions, label='Sinal Filtrado')

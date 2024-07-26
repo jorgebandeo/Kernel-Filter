@@ -26,7 +26,9 @@ white_noise = sinal_puro + np.random.normal(0, 1, len(n))
 O ruído gaussiano tem uma distribuição normal com média zero e desvio padrão específico.
 
 **Fórmula Matemática:**
+
 $$gaussian_{noise}(n) = \sin(2 \pi f n) + N(0, 0.5)$$
+
 onde $N(0, 0.5)$ representa uma distribuição normal com média 0 e variância 0.25.
 
 **Código:**
@@ -38,7 +40,9 @@ gaussian_noise = sinal_puro + np.random.normal(0, 0.5, len(n))
 O ruído de banda limitada é um sinal ruidoso dentro de uma faixa de frequências específica.
 
 **Fórmula Matemática:**
+
 $$band_{limited noise}(n) = \sin(2 \pi f n) + \sin(2 \pi 150 n) \cdot N(0, 0.5)$$
+
 onde $N(0, 0.5)$ é um ruído gaussiano.
 
 **Código:**
@@ -50,8 +54,11 @@ band_limited_noise = sinal_puro + np.sin(2 * np.pi * 150 * n) * np.random.normal
 O ruído impulsivo consiste em picos de alta amplitude que ocorrem esporadicamente.
 
 **Fórmula Matemática:**
+
 $$impulse_{noise}(n) = \sin(2 \pi f n)$$
+
 $$impulse_{noise}[\text{indices}] += N(0, 5)$$
+
 onde $\text{indices}$ são posições aleatórias no sinal.
 
 **Código:**
@@ -65,6 +72,7 @@ impulse_noise[impulse_indices] += np.random.normal(0, 5, 50)
 O ruído rosa possui uma densidade espectral de potência que decresce com o aumento da frequência.
 
 **Fórmula Matemática:**
+
 $$pink_{noise}(n) = \sin(2 \pi f n) + \sum_{k=1}^{n} N(0, 1)$$
 
 **Código:**
@@ -76,6 +84,7 @@ pink_noise = sinal_puro + np.cumsum(np.random.normal(0, 1, len(n)))
 O ruído de fundo é uma combinação de ruído gaussiano e uma componente sinusoidal.
 
 **Fórmula Matemática:**
+
 $$background_{noise}(n) = \sin(2 \pi f n) + N(0, 0.2) + \sin(2 \pi 50 n) \cdot 0.2$$
 
 **Código:**

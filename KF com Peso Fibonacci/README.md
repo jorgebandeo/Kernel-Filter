@@ -205,6 +205,4 @@ plot(original_signal, noisy_signal, filtered, nmse_values)
 
 Isso gerará um gráfico mostrando os sinais original, ruidoso e filtrado, juntamente com os valores de NMSE.
 
----
 
-Sinta-se à vontade para personalizar o código e os parâmetros para se adequar aos seus requisitos e casos de uso específicos.

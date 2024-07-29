@@ -40,8 +40,8 @@ def calculate_psnr(original, predicted):
     return psnr
 
 # Leitura dos dados do CSV
-df = pd.read_csv('KF com Peso Fibonacci/teste com dados/Dataset.csv')
-x = df['aX'].values
+df = pd.read_csv('Kernel FLMS/sigSp4-H4.csv')
+x = df['Y'].values
 
 # Adicionando ruído ao sinal para simular um ambiente realista (se necessário)
 v = np.random.normal(0, 1, len(x)) * np.sqrt(10**(-40/10))
@@ -49,7 +49,7 @@ x_noisy = x + v
 
 # Parâmetros do KLMS
 input_size = 1
-step_size = 0.1
+step_size = 0.4
 sigma = 1.0
 
 # Instancia o filtro KFLMS
@@ -68,12 +68,11 @@ for i in tqdm(range(len(x_noisy)), desc="Treinamento do KLMS"):
     errors.append(e)
     
     if i > 0:
-        mse = np.mean(np.square(errors))
+        
+        mse = np.mean(np.square(errors[1:]))
         variance = np.var(x[:i+1])
         nmse = 10 * np.log10(mse / variance)
         nmse_values.append(nmse)
-    
-    if i > 0:
         psnr = calculate_psnr(np.array(x[:i+1]), np.array(predictions[:i+1]))
         psnr_values.append(psnr)
 
@@ -89,6 +88,7 @@ plt.ylabel("Amplitude")
 plt.legend()
 
 plt.subplot(2, 2, 2)
+plt.plot(predictions, label='Sinal Filtrado')
 plt.plot(x, label='Sinal Original')
 plt.title("Sinal Original")
 plt.xlabel("Amostras")

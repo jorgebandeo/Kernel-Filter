@@ -44,8 +44,7 @@ def estimate(port, rw, stateNum):
     est = np.dot(port_sec, rw_sec.T)
     return est
 
-def plot(original, noisy, filtered, nmse_values, processing_times):
-    filtered = filtered[40:]
+def plot(original, noisy, filtered, nmse_values, processing_times, prediction_times):
     min_length = min(len(original), len(noisy), len(filtered))
     original = original[:min_length]
     noisy = noisy[:min_length]
@@ -55,12 +54,14 @@ def plot(original, noisy, filtered, nmse_values, processing_times):
     
     fig = plt.figure(figsize=(14, 10))
     plt.style.use('dark_background')
-    gs = GridSpec(3, 1, height_ratios=[2, 1, 1])
+    gs = GridSpec(4, 1, height_ratios=[2, 1, 1, 1])
     
     ax1 = fig.add_subplot(gs[0, 0])
     ax1.plot(x, noisy, color='#7116bc', linestyle='--', label='Noisy Signal')
     ax1.plot(x, filtered, color='#FF00FF', label='Filtered Signal')
     ax1.plot(x, original, color='#00FF00', label='Original Signal')
+
+
     ax1.set_xlabel('Time', color='white')
     ax1.set_ylabel('Value', color='white')
     ax1.legend(loc='upper right', frameon=False)
@@ -73,7 +74,6 @@ def plot(original, noisy, filtered, nmse_values, processing_times):
     ax2.legend(loc='upper right', frameon=False)
     ax2.grid(color='#444444', linestyle='--')
 
-    # Add a new subplot for processing times
     ax3 = fig.add_subplot(gs[2, 0])
     ax3.plot(range(len(processing_times)), processing_times, color='#00BFFF', label='Processing Time per Sample')
     ax3.axhline(y=np.mean(processing_times), color='r', linestyle='--', label='Average Processing Time')
@@ -83,13 +83,14 @@ def plot(original, noisy, filtered, nmse_values, processing_times):
     ax3.grid(color='#444444', linestyle='--')
 
     plt.tight_layout()
-    plt.savefig('resultados_Fibonacci.png', facecolor='#1e1e1e')
+    plt.savefig('resultados_Fibonacci_pacisnte.png', facecolor='#1e1e1e')
     plt.show()
 
 def kfilter(rw, numStates, seq, iterations=1):
     filtered = np.zeros_like(rw)
     nmse_values = []
     processing_times = np.zeros_like(rw)
+    prediction_times = np.zeros_like(rw)
     sigma_d_squared = np.var(rw)
 
     for iteration in range(iterations):
@@ -104,7 +105,6 @@ def kfilter(rw, numStates, seq, iterations=1):
             filtered[i] = est
             
 
-
             if iteration == iterations - 1:
                 mse = np.mean((filtered[numStates:i + 1] - rw[numStates:i + 1])**2)
                 nmse = 10 * np.log10(mse / sigma_d_squared)
@@ -116,8 +116,16 @@ def kfilter(rw, numStates, seq, iterations=1):
 
     for i in range(len(processing_times)):
         processing_times[i] = processing_times[i] / iterations
+
+    # Calculate the prediction times based on the displacement
+    for i in range(numStates, len(rw)):
+        for j in range(1, numStates + 1):
+            if i + j < len(rw) and filtered[i] == rw[i + j]:
+                prediction_times[i] = j
+                break
+
     filtered = np.clip(filtered, np.min(rw), np.max(rw))
-    return filtered, nmse_values, processing_times
+    return filtered, nmse_values, processing_times, prediction_times
 
 def calculate_mse(filtered, rw, numStates):
     diff_list = np.square(np.subtract(filtered[numStates:], rw[numStates:]))
@@ -127,10 +135,10 @@ def calculate_mse(filtered, rw, numStates):
 
 def run_kalman_filter(noisy_signal, numStates):
     seq = fibonacci(2000)
-    filtered, nmse_values, processing_times = kfilter(noisy_signal, numStates, seq, iterations=20)
+    filtered, nmse_values, processing_times, prediction_times = kfilter(noisy_signal, numStates, seq, iterations=1)
     mse = calculate_mse(filtered, noisy_signal, numStates)
     
-    return filtered, nmse_values, processing_times, mse
+    return filtered, nmse_values, processing_times, prediction_times, mse
 
 def extrair_dados_txt(arquivo_txt):
     with open(arquivo_txt, 'r') as file:
@@ -161,18 +169,18 @@ def adicionar_ruido_e_filtrar(dados, numStates=50):
     y_original = np.array([float(d[2]) for d in dados])
     x = np.arange(len(y_original))
 
-    ruido = np.random.normal(0, 1, len(y_original)) * np.sqrt(10 ** (4 / 10))
+    ruido = np.random.normal(0, 1, len(y_original)) * np.sqrt(10 ** (-40 / 10))
     y_ruidoso = y_original + ruido
 
-    filtered, nmse_values, processing_times, mse = run_kalman_filter(y_ruidoso, numStates)
+    filtered, nmse_values, processing_times, prediction_times, mse = run_kalman_filter(y_ruidoso, numStates)
 
     nmse_values = nmse_values[:len(filtered) - numStates]
 
-    plot(y_original[numStates:], y_ruidoso[numStates:], filtered[numStates:], nmse_values, processing_times)
+    plot(y_original[numStates:], y_ruidoso[numStates:], filtered[numStates:], nmse_values, processing_times[numStates:], prediction_times[numStates:])
 
-arquivo_txt = r'Testes com exemplos/sigSp4-H4.txt'
+arquivo_txt = r'Testes com exemplos/sigSp4-p7.txt'
 dados = extrair_dados_txt(arquivo_txt)
-arquivo_csv = r'Testes com exemplos/Fibonacci_sigSp4-H4.csv'
+arquivo_csv = r'Testes com exemplos/Fibonacci_sigSp4-p7.csv'
 salvar_dados_csv(dados, arquivo_csv)
 adicionar_ruido_e_filtrar(dados)
 

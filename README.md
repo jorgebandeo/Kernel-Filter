@@ -2,9 +2,9 @@
 # Algoritmo de Kernel Filtered-x Least Mean Square (KFxLMS)
 ## Melhor resultado KFLMS (Kernel Filtered Least Mean Squares)
 
-![Teste](/KFLMS/resultados%20csv.png)
+![Teste](/KFLMS/resultados%20csv2.png)
 
-obs:. como o Kernel usa a caracteristicas acumuladas do sinal para um sinal mutio grande ou de alta frequencia acaba se tornado ineficiente se não for usado uma janela deslizante para não obrecarregar o algoritmo com muitos dados anterior que não necessariemnte irão influenciar a longo prazo. a variação é de 150in/s para 30in/s
+obs:. como o Kernel usa a caracteristicas acumuladas do sinal para um sinal mutio grande ou de alta frequencia acaba se tornado ineficiente se não for usado uma janela deslizante para não obrecarregar o algoritmo com muitos dados anterior que não necessariemnte irão influenciar a longo prazo. a variação é de 150in/s para 30in/s - errata o novo modelo otimizado inclui a melhoria de desempenho e limitação de memoria do kernel
 
 ## Melhor resultado Kalman (usado para estudos)
 A partir dos dados coletados na pesquisa SIBGRAPI, conseguimos verificar a aplicação de um ruído artificial em um sinal. Logo após, testamos o conceito de filtros de Kalman abordados para o processamento do sinal fazendo uso de pesos gerados por Febonacci.

@@ -63,7 +63,7 @@ x_noisy = x + v
 
 # Parâmetros do KLMS
 input_size = 2
-step_size = 1.0
+step_size = 0.6
 sigma = 1.0
 max_memory = 1000  # Limite de memória para o kernel
 
@@ -83,7 +83,7 @@ for i in tqdm(range(len(x_noisy)), desc="Treinamento do KLMS"):
     errors.append(e)
     
     if i > 0:
-        mse = np.mean(np.square(errors[2:]))
+        mse = np.mean(np.square(errors))
         variance = np.var(x[:i+1])
         nmse = 10 * np.log10(mse / variance)
         nmse_values.append(nmse)

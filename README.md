@@ -1,5 +1,8 @@
 
 # Algoritmo de Kernel Filtered-x Least Mean Square (KFxLMS)
+
+## (KFxLMS) -Pendente-
+
 ## Melhor resultado KFLMS (Kernel Filtered Least Mean Squares)
 
 ![Teste](/KFLMS/resultados%20csv2.png)

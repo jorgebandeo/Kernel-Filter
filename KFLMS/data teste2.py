@@ -51,7 +51,8 @@ def calculate_psnr(original, predicted):
     return psnr
 
 # Leitura dos dados do CSV
-df = pd.read_csv('KFxLMS/sigSp4-H4.csv')
+df = pd.read_csv('KFxLMS/sigSp4-H4.csv', nrows=3000)
+
 x = df['Y'].values
 
 # Normalizando os dados
@@ -59,7 +60,7 @@ x = (x - np.mean(x)) / np.std(x)
 
 # Adicionando ruído ao sinal para simular um ambiente realista (se necessário)
 v = np.random.normal(0, 1, len(x)) * np.sqrt(10**(-100/10))
-x_noisy = x + v
+x_noisy = x 
 
 # Parâmetros do KLMS
 input_size = 2
@@ -80,9 +81,12 @@ psnr_values = []
 for i in tqdm(range(len(x_noisy)), desc="Treinamento do KLMS"):
     y, e = kflms.update(np.array([x_noisy[i]]), x[i], i)
     predictions.append(y)
-    errors.append(e)
-    
-    if i > 0:
+    if i == 0:
+        errors.append(0)
+        nmse_values.append(0)
+        psnr_values.append(0)
+    else: 
+        errors.append(e)
         mse = np.mean(np.square(errors))
         variance = np.var(x[:i+1])
         nmse = 10 * np.log10(mse / variance)

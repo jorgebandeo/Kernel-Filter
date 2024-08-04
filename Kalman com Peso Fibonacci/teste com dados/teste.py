@@ -52,13 +52,13 @@ def plot(original, filtered, nmse_values):
     plt.legend()
 
     plt.subplot(2, 1, 2)
-    plt.plot(x, nmse_values, color='g', label='NMSE')
+    plt.plot( nmse_values, color='g', label='NMSE')
     plt.xlabel('Time')
     plt.ylabel('NMSE (dB)')
     plt.legend()
 
     plt.tight_layout()
-    plt.savefig('Exemplo Kalman 1/teste com dados/teste csv.png')
+    plt.savefig('Kalman com Peso Fibonacci/teste com dados/teste data H4.png')
     plt.show()
 
 def kfilter(rw, numStates, seq):
@@ -66,12 +66,18 @@ def kfilter(rw, numStates, seq):
     nmse_values = []
     sigma_d_squared = np.var(rw)
     for i in range(numStates, len(rw)):
-        port = portion(seq, numStates - 1)
-        est = estimate(port, rw[i - numStates:i], numStates - 1)
-        filtered[i] = est
-        mse = np.mean((filtered[numStates:i + 1] - rw[numStates:i + 1])**2)
-        nmse = 10 * np.log10(mse / sigma_d_squared)
-        nmse_values.append(nmse)
+        if(i == 0):
+             filtered[i] = 0
+             nmse_values.append(0)
+        else:
+            port = portion(seq, numStates - 1)
+            est = estimate(port, rw[i - numStates:i], numStates - 1)
+            filtered[i] = est
+            mse = np.mean((filtered[numStates:i + 1] - rw[numStates:i + 1])**2)
+            nmse = 10 * np.log10(mse / sigma_d_squared)
+            nmse_values.append(nmse)
+        
+
 
     return filtered, nmse_values
 
@@ -85,18 +91,18 @@ def run_kalman_filter(noisy_signal, numStates):
     seq = fibonacci(2000)
     filtered, nmse_values = kfilter(noisy_signal, numStates, seq)
     mse = calculate_mse(filtered, noisy_signal, numStates)
-    plot(noisy_signal[numStates:], filtered[numStates:], nmse_values)
+    plot(noisy_signal[numStates:], filtered[numStates:], nmse_values[numStates:])
     return filtered, nmse_values, mse
 
 # Carregar o arquivo CSV
-file_path = 'Exemplo Kalman 1/teste com dados/Dataset.csv'  # Coloque o caminho do arquivo CSV aqui
-data = pd.read_csv(file_path)
+file_path = 'KFxLMS/sigSp4-H4.csv'  # Coloque o caminho do arquivo CSV aqui
+data = pd.read_csv(file_path, nrows=3000)
 
 # Extrair a primeira coluna (aX) como o sinal ruidoso
-noisy_signal = data['aX'].values
+noisy_signal = data['Y'].values
 
 # Aplicação do filtro
-numStates = 20 # Número de estados para o filtro
+numStates = 200 # Número de estados para o filtro
 filtered_signal, nmse_values, mse = run_kalman_filter(noisy_signal, numStates)
 
 

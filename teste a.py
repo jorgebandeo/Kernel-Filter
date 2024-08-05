@@ -101,10 +101,7 @@ def main():
     # Carregar dados do CSV
     file_path = 'Testes com exemplos/sigSp4-P7.csv'  # Substitua pelo caminho do seu arquivo CSV
     data = pd.read_csv(file_path)
-    signal = data['Y'].values[:10000]  # Usar apenas as primeiras 1000 linhas
-
-    # Normalizar o sinal
-    signal = signal / np.max(np.abs(signal))
+    signal = data['Y'].values[:3000]  # Usar apenas as primeiras 3000 linhas
 
     # Inicializar filtros
     lms_filter = LMS(num_params=1, learning_step=0.005)
@@ -221,7 +218,7 @@ def main():
     plt.legend()
 
     plt.tight_layout()
-    plt.savefig('./resultados_comparativosY.png')
+    plt.savefig('./resultados_comparativos a .png')
     plt.show()
 
     # Imprimir MSE médio após convergência

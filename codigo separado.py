@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.metrics import mean_squared_error
 from tqdm import tqdm
 import time
 
@@ -96,32 +95,24 @@ class KFxLMS(Kernel):
         self.update(new_input, error)
         return error
 
-# Função principal para processamento e plotagem
-def main():
-    # Carregar dados do CSV
-    file_path = 'Testes com exemplos/sigSp4-P7.csv'  # Substitua pelo caminho do seu arquivo CSV
-    data = pd.read_csv(file_path)
-    signal = data['Y'].values[:10000]  # Usar apenas as primeiras 1000 linhas
+# Função para determinar o ponto de convergência
+def find_convergence_point(output, signal, window_size=1):
+    errors = np.abs(signal - output)
+    average_error = np.mean(errors)
+    for i in range(window_size, len(errors)):
+        window_error = np.mean(errors[i-window_size:i])
+        if window_error < average_error:
+            return i
+    return len(errors)
 
-    # Normalizar o sinal
-    signal = signal / np.max(np.abs(signal))
 
+def lms(signal, num_params=1, learning_step=0.005):
     # Inicializar filtros
-    lms_filter = LMS(num_params=1, learning_step=0.005)
-    klms_filter = KLMS(num_params=1, sigma=0.4, learning_step=0.1)
-    kalman_filter = KalmanFilter(process_variance=1e-2, measurement_variance=0.01)
-    kfxlms_filter = KFxLMS(num_params=1, sigma=0.2, learning_step=0.2)
-
-    # Listas para armazenar sinais filtrados e erros
+    lms_filter = LMS(num_params, learning_step)
     lms_output = []
-    klms_output = []
-    kalman_output = []
-    kfxlms_output = []
     lms_errors = []
-    klms_errors = []
-    kalman_errors = []
-    kfxlms_errors = []
-
+    lms_mse_avg = 0
+    convergence_point_lms = 0
     # Processar o sinal com todos os filtros
     print("Processing with LMS Filter...")
     for i in tqdm(range(1, len(signal)), desc="LMS"):
@@ -133,7 +124,16 @@ def main():
         prediction = lms_filter.predict(input_signal)
         lms_output.append(prediction)
         lms_errors.append((expected - prediction) ** 2)
+    convergence_point_lms = find_convergence_point(lms_output, signal[1:])
+    lms_mse_avg = np.mean(lms_errors[convergence_point_lms:])
+    return lms_output, lms_errors, convergence_point_lms, lms_mse_avg
 
+def klms(signal, sigma=0.7, learning_step=0.2):
+    klms_filter = KLMS(num_params=1, sigma = sigma, learning_step = learning_step)
+    klms_output = []
+    klms_errors = []
+    klms_mse_avg = 0
+    convergence_point_klms = 0
     print("Processing with KLMS Filter...")
     for i in tqdm(range(1, len(signal)), desc="KLMS"):
         input_signal = np.array([signal[i-1]])
@@ -144,12 +144,17 @@ def main():
         prediction = klms_filter.predict(input_signal)
         klms_output.append(prediction)
         klms_errors.append((expected - prediction) ** 2)
+    convergence_point_klms = find_convergence_point(klms_output, signal[1:])
+    klms_mse_avg = np.mean(klms_errors[convergence_point_klms:])
+    return klms_output, klms_errors, convergence_point_klms, klms_mse_avg
 
+def kalman(signal, posteri_estimate = 0.0, posteri_error_estimate = 1.0, process_variance = 1e-2, measurement_variance = 0.01):
+    kalman_output = []
+    kalman_errors = []
+    kalman_mse_avg = 0
+    convergence_point_kalman = 0
     print("Processing with Kalman Filter...")
-    posteri_estimate = 0.0
-    posteri_error_estimate = 1.0
-    process_variance = 1e-2
-    measurement_variance = 0.01
+
     for i in tqdm(range(1, len(signal)), desc="Kalman"):
         measurement = signal[i]
 
@@ -164,7 +169,16 @@ def main():
 
         kalman_output.append(posteri_estimate)
         kalman_errors.append((measurement - posteri_estimate) ** 2)
+    convergence_point_kalman = find_convergence_point(kalman_output, signal[1:])
+    kalman_mse_avg = np.mean(kalman_errors[convergence_point_kalman:])
+    return kalman_output, kalman_errors, convergence_point_kalman, kalman_mse_avg
 
+def kfxlms(signal, sigma=0.5, learning_step=0.02):
+    kfxlms_filter = KFxLMS(num_params=1, sigma = sigma, learning_step = learning_step)
+    kfxlms_output = []
+    kfxlms_errors = []
+    kfxlms_mse_avg = 0
+    convergence_point_kfxlms = 0
     print("Processing with KFxLMS Filter...")
     for i in tqdm(range(1, len(signal)), desc="KFxLMS"):
         input_signal = np.array([signal[i-1]])
@@ -176,18 +190,54 @@ def main():
         kfxlms_output.append(prediction)
         kfxlms_errors.append((expected - prediction) ** 2)
 
-    # Converter MSE para dB
-    lms_mse_db = 10 * np.log10(lms_errors)
-    klms_mse_db = 10 * np.log10(klms_errors)
-    kalman_mse_db = 10 * np.log10(kalman_errors)
-    kfxlms_mse_db = 10 * np.log10(kfxlms_errors)
+    # Calcular MSE e ponto de convergência baseado no erro instantâneo
+    convergence_point_kfxlms = find_convergence_point(kfxlms_output, signal[1:])
+    kfxlms_mse_avg = np.mean(kfxlms_errors[convergence_point_kfxlms:])
+    return kfxlms_output, kfxlms_errors, convergence_point_kfxlms, kfxlms_mse_avg
 
-    # Calcular MSE médio após convergência
-    convergence_point = 200  # Definir um ponto de convergência arbitrário
-    lms_mse_avg = np.mean(lms_errors[convergence_point:])
-    klms_mse_avg = np.mean(klms_errors[convergence_point:])
-    kalman_mse_avg = np.mean(kalman_errors[convergence_point:])
-    kfxlms_mse_avg = np.mean(kfxlms_errors[convergence_point:])
+def main2():
+    # Carregar dados do CSV
+    file_path = 'Testes com exemplos/sigSp4-P7.csv'  # Substitua pelo caminho do seu arquivo CSV
+    data = pd.read_csv(file_path)
+    signal = data['Y'].values[:1000]  # Usar apenas as primeiras 3000 linhas
+
+    # Normalizar o sinal
+    signal = signal / np.max(np.abs(signal))
+
+    melhor = 0
+    mi = 0
+    mj = 0
+    for i in np.arange(0.1, 1.0, 0.1):
+        for j in np.arange(0.1, 1.0, 0.1):
+            #klms_output, klms_errors, convergence_point_klms, klms_mse_avg = klms(signal,i,j)
+            kfxlms_output, kfxlms_errors, convergence_point_kfxlms, kfxlms_mse_avg = kfxlms(signal, i , j ) 
+            if (10 * np.log10(kfxlms_mse_avg)) < melhor:
+                melhor = kfxlms_mse_avg
+                mi = i
+                mj = j 
+            print(f"resultado media de MSE {10 * np.log10(kfxlms_mse_avg):.4f} -  {j} e {i}")
+  
+    print(f" melor resultado media de MSE {10 * np.log10(melhor):.4f} , com {mi} e {mj}")
+
+    #kalman_output, kalman_errors, convergence_point_kalman, kalman_mse_avg = kalman(signal)
+    
+
+
+
+# Função principal para processamento e plotagem
+def main():
+    # Carregar dados do CSV
+    file_path = 'Testes com exemplos/sigSp4-P7.csv'  # Substitua pelo caminho do seu arquivo CSV
+    data = pd.read_csv(file_path)
+    signal = data['Y'].values[:1000]  # Usar apenas as primeiras 3000 linhas
+
+    # Normalizar o sinal
+    signal = signal / np.max(np.abs(signal))
+
+    lms_output, lms_errors, convergence_point_lms, lms_mse_avg = lms(signal)
+    klms_output, klms_errors, convergence_point_klms, klms_mse_avg = klms(signal)
+    kalman_output, kalman_errors, convergence_point_kalman, kalman_mse_avg = kalman(signal)
+    kfxlms_output, kfxlms_errors, convergence_point_kfxlms, kfxlms_mse_avg = kfxlms(signal)
 
     # Definir cores para cada filtro
     colors = {
@@ -196,6 +246,12 @@ def main():
         'Kalman': 'red',
         'KFxLMS': 'purple'
     }
+
+    # Converter MSE para dB
+    lms_mse_db = 10 * np.log10(lms_errors)
+    klms_mse_db = 10 * np.log10(klms_errors)
+    kalman_mse_db = 10 * np.log10(kalman_errors)
+    kfxlms_mse_db = 10 * np.log10(kfxlms_errors)
 
     # Plotar os erros quadráticos médios em dB ao longo do tempo
     plt.subplot(2, 1, 1)
@@ -224,11 +280,16 @@ def main():
     plt.savefig('./resultados_comparativosY.png')
     plt.show()
 
-    # Imprimir MSE médio após convergência
+    #Imprimir MSE médio após convergência e pontos de convergência
     print(f"LMS MSE médio após convergência: {10 * np.log10(lms_mse_avg):.4f} dB")
     print(f"KLMS MSE médio após convergência: {10 * np.log10(klms_mse_avg):.4f} dB")
     print(f"Kalman MSE médio após convergência: {10 * np.log10(kalman_mse_avg):.4f} dB")
     print(f"KFxLMS MSE médio após convergência: {10 * np.log10(kfxlms_mse_avg):.4f} dB")
 
+    print(f"Ponto de convergência LMS: {convergence_point_lms}")
+    print(f"Ponto de convergência KLMS: {convergence_point_klms}")
+    print(f"Ponto de convergência Kalman: {convergence_point_kalman}")
+    print(f"Ponto de convergência KFxLMS: {convergence_point_kfxlms}")
+
 if __name__ == "__main__":
-    main()
+    main2()

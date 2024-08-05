@@ -8,64 +8,64 @@ Este documento apresenta uma análise comparativa de quatro filtros: LMS, KLMS, 
 
 #### Imagem 1: MSE e Sinais Filtrados
 
-![Resultados Comparativos](./resultados_comparativos.png)
+![Resultados Comparativos](./resultados_comparativosY.png)
 
 A imagem acima mostra o erro quadrático médio (MSE) em decibéis (dB) ao longo do tempo para cada filtro, bem como os sinais filtrados.
 
-- **LMS Filter**:
+- **Filtro LMS**:
   - Cor: Azul
-  - MSE médio após convergência: -21.2358 dB
-  - Tempo de execução: - segundos
+  - MSE médio após convergência: -27.2263 dB
+  - Tempo de execução: (valor atualizado) segundos
+  - Convergência: 20 interações
 
-- **KLMS Filter**:
+- **Filtro KLMS**:
   - Cor: Verde
-  - MSE médio após convergência: -38.9979 dB
-  - Tempo de execução: 69 segundos
+  - MSE médio após convergência: -37.2999 dB
+  - Tempo de execução: 85 segundos
+  - Convergência: 4 interações
 
-- **Kalman Filter**:
+- **Filtro Kalman**:
   - Cor: Vermelho
-  - MSE médio após convergência: -59.4363 dB
-  - Tempo de execução: - segundos
+  - MSE médio após convergência: -31.006 dB
+  - Tempo de execução: (valor atualizado) segundos
+  - Convergência: 6 interações
 
-- **KFxLMS Filter**:
+- **Filtro KFxLMS**:
   - Cor: Roxo
-  - MSE médio após convergência: -42.9787 dB
-  - Tempo de execução: 104 segundos
+  - MSE médio após convergência: -37.2999 dB
+  - Tempo de execução: 124 segundos
+  - Convergência: 4 interações
 
 #### Imagem 2: Tempos de Execução
 
 ![Tempos de Execução](./resultado%20de%20tempo%20do%20comparativo%20.png)
 
-A imagem acima mostra os tempos de execução dos quatro filtros. 
+A imagem acima mostra os tempos de execução dos quatro filtros.
 
 ### Parâmetros Utilizados
 
 | Filtro         | Parâmetros                                   |
 |----------------|----------------------------------------------|
 | **LMS**        | `learning_step=0.005`                        |
-| **KLMS**       | `learning_step=0.1`, `sigma=0.4`             |
-| **Kalman**     | `process_variance=1e-2`, `measurement_variance=0.01` |
-| **KFxLMS**     | `learning_step=0.2`, `sigma=0.2`             |
+| **KLMS**       | `learning_step=0.9`, `sigma=0.9`             |
+| **Kalman**     | `process_variance=1e-3`, `measurement_variance=0.1` |
+| **KFxLMS**     | `learning_step=0.9`, `sigma=0.9`             |
 
 ### Análise dos Resultados
 
 #### Convergência e Desempenho
 
-1. **Kalman Filter**:
-   - O filtro de Kalman teve a convergência mais rápida e o menor MSE médio após a convergência, o que o torna o mais eficiente entre os quatro filtros. 
-   - A convergência rápida e eficiente do filtro de Kalman pode ser atribuída à sua capacidade de modelar processos lineares gaussianos com precisão, utilizando uma abordagem recursiva para atualização de estimativas.
+1. **Filtro LMS**:
+   - O filtro LMS apresentou uma convergência lenta, alcançando um MSE médio de -27.2263 dB após 20 interações. Seu tempo de execução foi razoável, o que o torna uma escolha adequada para aplicações que não exigem respostas rápidas.
 
-2. **KLMS Filter**:
-   - O filtro KLMS apresentou um bom desempenho em termos de MSE médio após a convergência, mas teve um tempo de execução significativamente mais longo em comparação com os filtros de Kalman e LMS.
-   - Os filtros kernelizados, como o KLMS, são eficazes em lidar com dados não lineares mapeando-os para um espaço de características de alta dimensão, mas isso vem com um custo computacional mais alto.
+2. **Filtro KLMS**:
+   - O filtro KLMS se destacou com um MSE médio de -37.2999 dB e uma rápida convergência em apenas 4 interações. No entanto, seu tempo de execução foi significativamente maior, indicando um custo computacional elevado.
 
-3. **KFxLMS Filter**:
-   - O filtro KFxLMS teve um desempenho intermediário em termos de MSE, mas também apresentou um tempo de execução longo.
-   - Similar ao KLMS, o KFxLMS é adequado para aplicações não lineares, mas a complexidade adicional resulta em maior tempo de processamento.
+3. **Filtro Kalman**:
+   - O filtro Kalman apresentou um bom desempenho, com um MSE médio de -31.006 dB e convergência em 6 interações. Seu tempo de execução foi competitivo, o que o torna uma boa opção para aplicações que exigem um equilíbrio entre precisão e eficiência.
 
-4. **LMS Filter**:
-   - O filtro LMS teve a menor eficiência em termos de MSE, mas seu tempo de execução foi relativamente curto.
-   - O filtro LMS é adequado para sistemas lineares e de baixa complexidade, onde a velocidade de processamento é mais crítica do que a precisão da filtragem.
+4. **Filtro KFxLMS**:
+   - O filtro KFxLMS mostrou um desempenho semelhante ao KLMS em termos de MSE médio (-37.2999 dB) e convergência rápida (4 interações). Contudo, seu tempo de execução foi o mais elevado, refletindo a complexidade adicional do algoritmo.
 
 ### Aplicações dos Filtros Kernelizados
 
@@ -92,29 +92,15 @@ Os filtros kernelizados podem ser particularmente eficazes em uma caneta auto es
 3. **Robustez Contra Ruídos**:
    - Esses filtros são eficazes na filtragem de ruídos não lineares que podem estar presentes nos sinais do acelerômetro, resultando em um controle mais suave e estável.
 
-#### Estudo e Prototipagem
-
-Um estudo avaliando a aplicação de filtros kernelizados em um protótipo de caneta auto estabilizadora seria interessante porque:
-
-- **Validação Experimental**:
-  - Validar experimentalmente a eficácia dos filtros kernelizados na estabilização da caneta em comparação com filtros lineares como o Kalman.
-
-- **Desenvolvimento de Algoritmos**:
-  - Desenvolver algoritmos específicos para a compensação dos tremores, otimizando a resposta da caneta em diferentes condições de tremor.
-
-- **Melhorias no Código**:
-  - **Paralelização**: Implementar técnicas de paralelização para reduzir o tempo de execução dos filtros kernelizados.
-  - **Otimização de Parâmetros**: Ajustar parâmetros como `sigma` e `learning_step` para encontrar o balanço ideal entre precisão e tempo de execução.
-  - **Uso de GPUs**: Utilizar GPUs para acelerar o processamento dos filtros kernelizados, que são computacionalmente intensivos.
-
 ### Conclusão
 
 Esta análise destaca os trade-offs entre precisão, tempo de execução e aplicabilidade dos diferentes filtros. O filtro de Kalman se destaca pela sua eficiência em sistemas lineares, enquanto os filtros kernelizados são mais adequados para aplicações não lineares, apesar de seu maior custo computacional. No contexto de uma caneta auto estabilizadora para pessoas com Parkinson, filtros kernelizados podem oferecer vantagens significativas em termos de precisão e adaptação dinâmica, justificando estudos e prototipagem adicionais para explorar seu potencial.
 
+### Considerações Finais
+
+Os algoritmos de kernel não foram testados no protótipo desenvolvido devido à desenvolvedora, Jessica Cristina Tironi, já ter se formado. Os códigos foram testados em nível teórico, onde os benefícios dos filtros kernelizados demonstraram uma vantagem. A integração desses filtros em uma caneta inteligente que se autocorrige para tremores pode ser interessante, mas a validade deveria ser testada através da implementação física. Os códigos também podem ser otimizados para ter um processamento mais rápido, melhorando as bibliotecas e aplicando memória deslizante para que, em grandes sinais, os filtros kernelizados não se saturem.
+
 ---
 
 ### Referências
-- [----]()
-
-
----
+- [Referências específicas sobre os filtros e a aplicação prática]

@@ -207,22 +207,24 @@ def main2():
     melhor = 0
     mi = 0
     mj = 0
-    for i in np.arange(0.1, 1.0, 0.1):
-        for j in np.arange(0.1, 1.0, 0.1):
-            #klms_output, klms_errors, convergence_point_klms, klms_mse_avg = klms(signal,i,j)
-            kfxlms_output, kfxlms_errors, convergence_point_kfxlms, kfxlms_mse_avg = kfxlms(signal, i , j ) 
-            if (10 * np.log10(kfxlms_mse_avg)) < melhor:
-                melhor = kfxlms_mse_avg
-                mi = i
-                mj = j 
-            print(f"resultado media de MSE {10 * np.log10(kfxlms_mse_avg):.4f} -  {j} e {i}")
-  
-    print(f" melor resultado media de MSE {10 * np.log10(melhor):.4f} , com {mi} e {mj}")
-
-    #kalman_output, kalman_errors, convergence_point_kalman, kalman_mse_avg = kalman(signal)
+    if False:
+        for i in np.arange(0.1, 1.0, 0.1):
+            for j in np.arange(0.1, 1.0, 0.1):
+                #klms_output, klms_errors, convergence_point_klms, klms_mse_avg = klms(signal,i,j)
+                kfxlms_output, kfxlms_errors, convergence_point_kfxlms, kfxlms_mse_avg = kfxlms(signal, i , j ) 
+                if (10 * np.log10(kfxlms_mse_avg)) < melhor:
+                    melhor = kfxlms_mse_avg
+                    mi = i
+                    mj = j 
+                print(f"resultado media de MSE {10 * np.log10(kfxlms_mse_avg):.4f} -  {j} e {i}")
     
-
-
+        print(f" melor resultado media de MSE {10 * np.log10(melhor):.4f} , com {mi} e {mj}")
+    mi = 0.000000001
+    mj = 0.000000001
+    kalman_output, kalman_errors, convergence_point_kalman, kalman_mse_avg = kalman(signal,mi,mj)
+    print(f" melor resultado media de MSE {10 * np.log10(kalman_mse_avg):.4f} , com {mi} e {mj}")
+    a = find_convergence_point(kalman_output, signal[:len(kalman_output)])
+    print(a)
 
 # Função principal para processamento e plotagem
 def main():

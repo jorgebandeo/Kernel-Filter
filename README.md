@@ -15,26 +15,26 @@ A imagem acima mostra o erro quadrático médio (MSE) em decibéis (dB) ao longo
 - **Filtro LMS**:
   - Cor: Azul
   - MSE médio após convergência: -27.2263 dB
-  - Tempo de execução: (valor atualizado) segundos
-  - Convergência: 20 interações
+  - Tempo de execução: >1 segundos
+  - Convergência: 50 interações
 
 - **Filtro KLMS**:
   - Cor: Verde
   - MSE médio após convergência: -37.2999 dB
   - Tempo de execução: 85 segundos
-  - Convergência: 4 interações
+  - Convergência: 10 interações
 
 - **Filtro Kalman**:
   - Cor: Vermelho
   - MSE médio após convergência: -31.006 dB
-  - Tempo de execução: (valor atualizado) segundos
-  - Convergência: 6 interações
+  - Tempo de execução: >1 segundos
+  - Convergência: 15 interações
 
 - **Filtro KFxLMS**:
   - Cor: Roxo
   - MSE médio após convergência: -37.2999 dB
   - Tempo de execução: 124 segundos
-  - Convergência: 4 interações
+  - Convergência: 10 interações
 
 #### Imagem 2: Tempos de Execução
 
@@ -56,16 +56,16 @@ A imagem acima mostra os tempos de execução dos quatro filtros.
 #### Convergência e Desempenho
 
 1. **Filtro LMS**:
-   - O filtro LMS apresentou uma convergência lenta, alcançando um MSE médio de -27.2263 dB após 20 interações. Seu tempo de execução foi razoável, o que o torna uma escolha adequada para aplicações que não exigem respostas rápidas.
+   - O filtro LMS apresentou uma convergência lenta, alcançando um MSE médio de -27.2263 dB. Seu tempo de convergencia foi de 50, o que o torna uma escolha adequada para aplicações que não exigem respostas rápidas.
 
 2. **Filtro KLMS**:
-   - O filtro KLMS se destacou com um MSE médio de -37.2999 dB e uma rápida convergência em apenas 4 interações. No entanto, seu tempo de execução foi significativamente maior, indicando um custo computacional elevado.
+   - O filtro KLMS se destacou com um MSE médio de -37.2999 dB e uma rápida convergência em apenas 10 interações. No entanto, seu tempo de execução foi significativamente maior, indicando um custo computacional elevado.
 
 3. **Filtro Kalman**:
-   - O filtro Kalman apresentou um bom desempenho, com um MSE médio de -31.006 dB e convergência em 6 interações. Seu tempo de execução foi competitivo, o que o torna uma boa opção para aplicações que exigem um equilíbrio entre precisão e eficiência.
+   - O filtro Kalman apresentou um bom desempenho, com um MSE médio de -31.006 dB e convergência em 15 interações. Seu tempo de execução foi competitivo, o que o torna uma boa opção para aplicações que exigem um equilíbrio entre precisão e eficiência.
 
 4. **Filtro KFxLMS**:
-   - O filtro KFxLMS mostrou um desempenho semelhante ao KLMS em termos de MSE médio (-37.2999 dB) e convergência rápida (4 interações). Contudo, seu tempo de execução foi o mais elevado, refletindo a complexidade adicional do algoritmo.
+   - O filtro KFxLMS mostrou um desempenho semelhante ao KLMS em termos de MSE médio (-37.2999 dB) e convergência rápida (10 interações). Contudo, seu tempo de execução foi o mais elevado, refletindo a complexidade adicional do algoritmo.
 
 ### Aplicações dos Filtros Kernelizados
 
@@ -84,7 +84,7 @@ Os filtros kernelizados podem ser particularmente eficazes em uma caneta auto es
 #### Vantagens dos Filtros Kernelizados
 
 1. **Modelagem Não Linear**:
-   - Os tremores das mãos de pessoas com Parkinson não seguem um padrão linear simples. Filtros kernelizados como o KLMS e o KFxLMS podem modelar essa relação não linear entre os sinais do acelerômetro e os ajustes necessários nos motores, proporcionando uma compensação mais precisa e eficaz.
+   - Os tremores das mãos de pessoas com Parkinson não seguem um padrão linear simples. Filtros kernelizados como o KLMS e o KFxLMS podem modelar essa relação não linear entre os sinais do acelerômetro e os ajustes necessários nos motores.
 
 2. **Adaptação Dinâmica**:
    - Filtros kernelizados podem se adaptar dinamicamente às mudanças nas características dos tremores, ajustando continuamente o controle do motor para manter a estabilidade da caneta.
@@ -103,4 +103,4 @@ Os algoritmos de kernel não foram testados no protótipo desenvolvido devido à
 ---
 
 ### Referências
-- [Referências específicas sobre os filtros e a aplicação prática]
+- [-------------]

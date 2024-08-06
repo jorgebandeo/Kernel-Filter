@@ -120,7 +120,7 @@ def main():
     # Inicializar filtros
     lms_filter = LMS(num_params=1, learning_step=0.005)
     klms_filter = KLMS(num_params=1, sigma=0.9, learning_step=0.9)
-    kalman_filter = KalmanFilter(process_variance=1e-3, measurement_variance=0.1)
+    kalman_filter = KalmanFilter(kalman_mse_avg)
     kfxlms_filter = KFxLMS(num_params=1, sigma=0.9, learning_step=0.9)
 
     # Listas para armazenar sinais filtrados e erros

@@ -37,7 +37,7 @@ filtered_tremor_signal = tremor_signal
 
 # Parâmetros do algoritmo RLS
 order = 12  # Ordem do filtro ajustada
-delta = 1.0  # Parâmetro de regularização inicial
+delta = 0.6 # Parâmetro de regularização inicial
 lambda_ = 0.99  # Fator de esquecimento
 
 # Inicializar vetores

@@ -40,7 +40,7 @@ def gaussian_kernel(x1, x2, sigma):
     return np.exp(-np.linalg.norm(x1 - x2) ** 2 / (2 * sigma ** 2))
 
 # Parâmetros do algoritmo KRLS
-sigma = 0.9  # Parâmetro do kernel gaussiano
+sigma = 0.9 # Parâmetro do kernel gaussiano
 order = 12  # Ordem do filtro ajustada
 delta = 1.0  # Parâmetro de regularização inicial
 lambda_ = 0.99  # Fator de esquecimento
